@@ -66,9 +66,10 @@ export default function Contact() {
               <em className="text-gold-soft">procurement desk.</em>
             </h2>
             <p className="mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-ivory/65">
-              Call or send us a WhatsApp message with your requirement — item
-              descriptions, quantities, standards, delivery location and timeline.
-              Our team will respond with a competitive, compliant quotation.
+              Call, email or send us a WhatsApp message with your requirement —
+              item descriptions, quantities, standards, delivery location and
+              timeline. Our team will respond with a competitive, compliant
+              quotation.
             </p>
 
             <div className="mt-10 border-t border-line-dark">
@@ -257,7 +258,7 @@ export default function Contact() {
               </div>
 
               <p className="mt-6 border-t border-line pt-4 font-mono text-[0.5625rem] uppercase leading-relaxed tracking-[0.16em] text-muted/80">
-                Phone &amp; WhatsApp only · {WORKING_HOURS}
+                Phone · WhatsApp · Email · {WORKING_HOURS}
               </p>
             </div>
           </Reveal>
