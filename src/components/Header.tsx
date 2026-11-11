@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Clock, MapPin, Menu, Phone, X } from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, Menu, Navigation, Phone, X } from "lucide-react";
 import {
   ADDRESS,
+  EMAIL,
+  EMAIL_URL,
+  MAPS_URL,
   NAV,
   PHONE_DISPLAY,
   PHONE_TEL,
@@ -74,16 +77,23 @@ export default function Header() {
               Incorporated 2015
             </p>
             <div className="flex items-center gap-6">
-              <p className="flex items-center gap-2">
+              <p className="hidden items-center gap-2 xl:flex">
                 <Clock size={12} className="text-gold" aria-hidden />
                 {WORKING_HOURS}
               </p>
+              <a
+                href={EMAIL_URL}
+                className="hidden items-center gap-2 normal-case tracking-[0.1em] text-ivory/80 transition-colors hover:text-gold-soft lg:flex"
+              >
+                <Mail size={12} className="text-gold" aria-hidden />
+                {EMAIL}
+              </a>
               <a
                 href={`tel:${PHONE_TEL}`}
                 className="flex items-center gap-2 text-ivory/80 transition-colors hover:text-gold-soft"
               >
                 <Phone size={12} className="text-gold" aria-hidden />
-                Procurement desk · {PHONE_DISPLAY}
+                {PHONE_DISPLAY}
               </a>
             </div>
           </div>
@@ -247,7 +257,7 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
-                    className="inline-flex items-center justify-center gap-2.5 border border-gold/50 px-4 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-ivory transition-colors hover:bg-gold hover:text-ink"
+                    className="inline-flex items-center justify-center gap-2.5 border border-gold/50 px-3 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ivory transition-colors hover:bg-gold hover:text-ink"
                   >
                     <WhatsAppIcon className="h-4 w-4" />
                     WhatsApp
@@ -255,10 +265,28 @@ export default function Header() {
                   <a
                     href={`tel:${PHONE_TEL}`}
                     onClick={() => setOpen(false)}
-                    className="inline-flex items-center justify-center gap-2.5 border border-ivory/20 px-4 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-ivory transition-colors hover:border-gold hover:text-gold-soft"
+                    className="inline-flex items-center justify-center gap-2.5 border border-ivory/20 px-3 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ivory transition-colors hover:border-gold hover:text-gold-soft"
                   >
                     <Phone size={14} aria-hidden />
                     Call
+                  </a>
+                  <a
+                    href={EMAIL_URL}
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center gap-2.5 border border-ivory/20 px-3 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ivory transition-colors hover:border-gold hover:text-gold-soft"
+                  >
+                    <Mail size={14} aria-hidden />
+                    Email
+                  </a>
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center gap-2.5 border border-ivory/20 px-3 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ivory transition-colors hover:border-gold hover:text-gold-soft"
+                  >
+                    <Navigation size={14} aria-hidden />
+                    Directions
                   </a>
                 </div>
                 <a

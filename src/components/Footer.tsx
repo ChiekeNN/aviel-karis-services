@@ -1,6 +1,8 @@
-import { ArrowUpRight, Flag, Phone } from "lucide-react";
+import { ArrowUpRight, Flag, Mail, Phone } from "lucide-react";
 import {
   ADDRESS,
+  EMAIL,
+  EMAIL_URL,
   NAV,
   PHONE_DISPLAY,
   PHONE_TEL,
@@ -111,6 +113,13 @@ export default function Footer() {
             >
               <WhatsAppIcon className="h-3.5 w-3.5 text-gold/80" />
               WhatsApp us
+            </a>
+            <a
+              href={EMAIL_URL}
+              className="flex items-start gap-2.5 break-all transition-colors hover:text-gold-soft"
+            >
+              <Mail size={13} className="mt-0.5 shrink-0 text-gold/80" aria-hidden />
+              {EMAIL}
             </a>
           </div>
           <p className="mt-4 text-[0.75rem] leading-relaxed">

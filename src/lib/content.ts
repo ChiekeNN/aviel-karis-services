@@ -232,6 +232,7 @@ export const NAV = [
 export const ADDRESS =
   "No 19 Obudu Street, Mile 1 Rumuwoji, Port Harcourt, Rivers State, Nigeria.";
 
+export const EMAIL = "info@avielkarisservices.com";
 export const PHONE_DISPLAY = "+234 902 033 4832";
 export const PHONE_TEL = "+2349020334832";
 export const WHATSAPP_NUMBER = "2349020334832";
@@ -250,9 +251,32 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
   WHATSAPP_MESSAGE,
 )}`;
 
+const MAP_QUERY = ADDRESS.replace(/\.$/, "");
+
 export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  ADDRESS,
+  MAP_QUERY,
 )}`;
+
+export const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(
+  MAP_QUERY,
+)}&z=16&hl=en&output=embed`;
+
+const EMAIL_SUBJECT = "Request for Quotation";
+
+const EMAIL_BODY = `Hello Aviel Karis Services,
+
+I would like to request a quotation.
+
+Company:
+Service needed:
+Location:
+Timeline:
+
+I can share drawings or specifications by reply.`;
+
+export const EMAIL_URL = `mailto:${EMAIL}?subject=${encodeURIComponent(
+  EMAIL_SUBJECT,
+)}&body=${encodeURIComponent(EMAIL_BODY)}`;
 
 export const STATS = [
   { value: "2015", label: "Incorporated in Nigeria", note: "Port Harcourt HQ" },
