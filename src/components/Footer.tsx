@@ -50,7 +50,7 @@ export default function Footer() {
 
       <div className="shell grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Logo theme="light" />
+          <Logo className="h-11" />
           <p className="mt-6 max-w-xs text-[0.8125rem] leading-relaxed">
             Upstream and midstream oil &amp; gas services, marine and industrial
             engineering contractor. Incorporated in Nigeria, 2015.
@@ -133,15 +133,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Wordmark */}
-      <div className="shell relative">
-        <p
-          aria-hidden
-          className="select-none border-t border-line-dark pt-8 text-center text-[clamp(2.5rem,11vw,9rem)] font-extrabold uppercase leading-none tracking-[-0.03em] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.07)]"
-        >
-          Aviel Karis
-        </p>
-      </div>
 
       <div className="border-t border-line-dark">
         <div className="shell flex flex-col justify-between gap-3 py-6 font-mono text-[0.5625rem] uppercase tracking-[0.16em] sm:flex-row sm:items-center">

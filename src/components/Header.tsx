@@ -114,7 +114,11 @@ export default function Header() {
             }`}
           >
             <a href="#home" aria-label="Aviel Karis Services Ltd — home" className="shrink-0">
-              <Logo theme={scrolled ? "dark" : "light"} />
+              <Logo
+                className={scrolled ? "h-9" : "h-10"}
+                alt=""
+                priority
+              />
             </a>
 
             <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
@@ -201,7 +205,7 @@ export default function Header() {
           >
             <div className="relative z-10 shell flex min-h-full flex-col py-6">
               <div className="flex items-center justify-between">
-                <Logo theme="light" />
+                <Logo className="h-10" />
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
