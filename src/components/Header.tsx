@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, FileText } from "lucide-react";
-import { NAV } from "@/lib/content";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { ArrowUpRight, Clock, MapPin, Menu, X } from "lucide-react";
+import { NAV, ADDRESS } from "@/lib/content";
 import { Logo } from "./ui";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("#home");
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -17,56 +20,232 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const ids = NAV.map((n) => n.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3">
-      <motion.nav
-        aria-label="Primary"
-        animate={{ maxWidth: scrolled ? 1180 : 1320 }}
-        className={`mx-auto flex items-center justify-between rounded-xl px-4 py-3 transition-colors duration-300 ${
-          scrolled ? "border border-white/10 bg-brand-dark/80 shadow-xl backdrop-blur-xl" : "bg-transparent"
-        }`}
-      >
-        <a href="#home" aria-label="Aviel Karis Services Ltd — home"><Logo light /></a>
-        <ul className="hidden items-center gap-1 lg:flex">
-          {NAV.map((n) => (
-            <li key={n.href}>
-              <a href={n.href} className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white">
-                {n.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <a href="#contact" className="hidden items-center gap-2 rounded-md bg-brand-crimson px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-crimson/20 transition hover:bg-brand-red lg:inline-flex">
-          <FileText size={16} aria-hidden /> Request RFQ / Procurement Inquiry
-        </a>
-        <button
-          className="rounded-md p-2 text-white lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
+    <>
+      <header className="fixed inset-x-0 top-0 z-50">
+        {/* Utility bar */}
+        <div
+          className={`hidden overflow-hidden border-b bg-ink text-ivory/65 transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] lg:block ${
+            scrolled
+              ? "max-h-0 border-transparent opacity-0"
+              : "max-h-12 border-line-dark opacity-100"
+          }`}
         >
-          {open ? <X /> : <Menu />}
-        </button>
-      </motion.nav>
+          <div className="shell flex h-9 items-center justify-between font-mono text-[0.625rem] uppercase tracking-[0.2em]">
+            <p className="flex items-center gap-2">
+              <MapPin size={12} className="text-gold" aria-hidden />
+              Port Harcourt, Nigeria
+              <span className="mx-2 h-1 w-1 rotate-45 bg-ivory/25" aria-hidden />
+              Incorporated 2015
+            </p>
+            <div className="flex items-center gap-6">
+              <p className="flex items-center gap-2">
+                <Clock size={12} className="text-gold" aria-hidden />
+                Mon–Fri 08:00–17:00 WAT
+              </p>
+              <a
+                href="#contact"
+                className="text-ivory/80 transition-colors hover:text-gold-soft"
+              >
+                Procurement desk · 7 days a week
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Main bar */}
+        <div
+          className={`transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${
+            scrolled
+              ? "border-b border-ink/10 bg-ivory/85 shadow-[0_10px_40px_-24px_rgba(6,11,18,0.5)] backdrop-blur-xl"
+              : "border-b border-transparent bg-transparent"
+          }`}
+        >
+          <nav
+            aria-label="Primary"
+            className={`shell flex items-center justify-between transition-all duration-500 ${
+              scrolled ? "h-[68px]" : "h-[88px]"
+            }`}
+          >
+            <a href="#home" aria-label="Aviel Karis Services Ltd — home" className="shrink-0">
+              <Logo theme={scrolled ? "dark" : "light"} />
+            </a>
+
+            <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
+              {NAV.map((n) => {
+                const isActive = active === n.href;
+                return (
+                  <li key={n.href}>
+                    <a
+                      href={n.href}
+                      aria-current={isActive ? "location" : undefined}
+                      className={`group relative block py-2 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors ${
+                        scrolled
+                          ? isActive
+                            ? "text-ink"
+                            : "text-ink/70 hover:text-ink"
+                          : isActive
+                            ? "text-ivory"
+                            : "text-ivory/70 hover:text-ivory"
+                      }`}
+                    >
+                      {n.label}
+                      <span
+                        aria-hidden
+                        className={`absolute -bottom-0.5 left-0 h-px bg-gold transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="#contact"
+                className={`group hidden items-center gap-3 px-5 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.18em] transition-all duration-300 lg:inline-flex ${
+                  scrolled
+                    ? "bg-ink text-ivory hover:bg-scarlet"
+                    : "bg-scarlet text-ivory hover:bg-scarlet-deep"
+                }`}
+              >
+                Request RFQ
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
+              </a>
+              <button
+                onClick={() => setOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={open}
+                className={`grid h-11 w-11 place-items-center border transition-colors lg:hidden ${
+                  scrolled
+                    ? "border-ink/15 text-ink"
+                    : "border-ivory/25 text-ivory"
+                }`}
+              >
+                <Menu size={19} aria-hidden />
+              </button>
+            </div>
+          </nav>
+          <motion.div
+            style={{ scaleX: progress }}
+            className="h-px origin-left bg-gradient-to-r from-scarlet via-gold to-gold-soft"
+            aria-hidden
+          />
+        </div>
+      </header>
+
+      {/* Mobile drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-            className="mx-auto mt-2 max-w-[1180px] rounded-xl border border-white/10 bg-brand-dark/95 p-4 backdrop-blur-xl lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-[60] overflow-y-auto bg-ink grain lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
           >
-            <ul className="flex flex-col">
-              {NAV.map((n) => (
-                <li key={n.href}>
-                  <a onClick={() => setOpen(false)} href={n.href} className="block rounded-md px-3 py-3 text-slate-200 hover:bg-white/5">{n.label}</a>
-                </li>
-              ))}
-            </ul>
-            <a onClick={() => setOpen(false)} href="#contact" className="mt-3 block rounded-md bg-brand-crimson px-4 py-3 text-center text-sm font-semibold text-white">
-              Request RFQ / Procurement Inquiry
-            </a>
+            <div className="relative z-10 shell flex min-h-full flex-col py-6">
+              <div className="flex items-center justify-between">
+                <Logo theme="light" />
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="grid h-11 w-11 place-items-center border border-ivory/20 text-ivory transition-colors hover:border-gold hover:text-gold"
+                >
+                  <X size={19} aria-hidden />
+                </button>
+              </div>
+
+              <nav aria-label="Mobile" className="mt-14 flex-1">
+                <ul className="divide-y divide-line-dark border-y border-line-dark">
+                  {NAV.map((n, i) => (
+                    <motion.li
+                      key={n.href}
+                      initial={{ opacity: 0, x: -14 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.08 + i * 0.05, duration: 0.5 }}
+                    >
+                      <a
+                        href={n.href}
+                        onClick={() => setOpen(false)}
+                        className="group flex items-baseline justify-between py-5"
+                      >
+                        <span className="flex items-baseline gap-5">
+                          <span className="font-mono text-[0.625rem] tracking-[0.2em] text-gold/85">
+                            0{i + 1}
+                          </span>
+                          <span className="display text-3xl text-ivory transition-colors group-hover:text-gold-soft">
+                            {n.label}
+                          </span>
+                        </span>
+                        <ArrowUpRight
+                          size={18}
+                          className="text-ivory/30 transition-colors group-hover:text-gold"
+                          aria-hidden
+                        />
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+
+              <div className="mt-10 border-t border-line-dark pt-7">
+                <p className="font-mono text-[0.625rem] uppercase tracking-[0.24em] text-gold">
+                  Head Office
+                </p>
+                <p className="mt-3 max-w-xs text-sm leading-relaxed text-ivory/60">
+                  {ADDRESS}
+                </p>
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="mt-6 inline-flex w-full items-center justify-between bg-scarlet px-6 py-4 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-ivory"
+                >
+                  Request a quotation
+                  <ArrowUpRight size={16} aria-hidden />
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
