@@ -6,8 +6,7 @@ import "@fontsource/instrument-serif/latin-400-italic.css";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import MotionProvider from "@/components/MotionProvider";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
 
 const SITE_TITLE =
   "Aviel Karis Services Ltd | Oil & Gas, Marine & Industrial Engineering";
