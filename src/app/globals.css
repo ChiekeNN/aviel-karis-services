@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --brand-crimson: #d91e18;
+  --brand-red: #e60000;
+  --brand-orange: #e67e22;
+  --brand-ochre: #d35400;
+  --brand-dark: #0b1320;
+  --brand-navy: #0f172a;
+  --brand-steel: #f1f5f9;
+  --brand-line: #e2e8f0;
+  --brand-line-dark: #1e293b;
+}
+
+@theme inline {
+  --color-brand-crimson: var(--brand-crimson);
+  --color-brand-red: var(--brand-red);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-ochre: var(--brand-ochre);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-steel: var(--brand-steel);
+  --color-brand-line: var(--brand-line);
+  --color-brand-line-dark: var(--brand-line-dark);
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+.grid-bg {
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
