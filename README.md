@@ -80,11 +80,14 @@ labels for technical precision.
   accordion and honouring of `prefers-reduced-motion` via `MotionProvider`.
 - **Imagery** — cinematic photography in `public/images`, rendered through
   `next/image` (AVIF/WebP).
-- **Brand** — the official Aviel Karis wordmark lives in `public/brand` with the
-  white background removed so it sits on both ink and ivory surfaces. It is the
-  only logo asset: header, mobile drawer and footer all render it through the
-  `Logo` component in `src/components/ui.tsx`. The favicon and Apple touch icon
-  are crops of the same artwork. Do not redraw or re-letter the mark.
+- **Brand** — the official Aviel Karis wordmark lives in `public/brand`, with the
+  white background removed and two colourways: the supplied red lettering on
+  light surfaces (`aviel-karis-logo.png`) and white lettering on ink surfaces
+  (`aviel-karis-logo-white.png`), while the copper keyline stays copper in both.
+  Header, mobile drawer and footer render it through the `Logo` component in
+  `src/components/ui.tsx`, which takes `theme="dark" | "light"` for the surface
+  it sits on. The favicon and Apple touch icon are crops of the same artwork. Do
+  not redraw or re-letter the mark.
 
 ## Project structure
 
