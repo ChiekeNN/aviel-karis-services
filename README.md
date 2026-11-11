@@ -99,6 +99,22 @@ Almost all copy lives in `src/lib/content.ts` — services, pillars, sectors,
 process steps, FAQs, statistics, navigation and the head-office address. Update
 it there rather than inside presentational components.
 
+## Deployment (Vercel)
+
+The repository is connected to Vercel through the GitHub integration, so every
+push to `main` produces a production deployment and every pull request produces
+a preview deployment. No CLI token is required.
+
+Before the first production deployment:
+
+1. Add `DATABASE_URL` to the Vercel project (Production and Preview) so the RFQ
+   desk can persist requests. Without it the site still builds and runs; the RFQ
+   endpoint returns a readable `503`.
+2. Add `NEXT_PUBLIC_SITE_URL` with the production domain so canonical URLs, Open
+   Graph images and `sitemap.xml` resolve correctly.
+3. Keep the Vercel Node.js version at 20.9 or newer (`engines` and `.nvmrc` pin
+   this in the repository).
+
 ## Repository hygiene
 
 `.gitignore` covers dependencies, Next.js build output, local environment files
