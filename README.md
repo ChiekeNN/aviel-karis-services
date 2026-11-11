@@ -36,7 +36,7 @@ Open <http://localhost:3000>.
 | Variable               | Required | Purpose                                                     |
 | ---------------------- | -------- | ----------------------------------------------------------- |
 | `DATABASE_URL`         | Yes      | PostgreSQL connection used by the RFQ and health endpoints. |
-| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL for metadata, `sitemap.xml` and `robots.txt`. Defaults to `http://localhost:3000`. |
+| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL for metadata, `sitemap.xml` and `robots.txt`. On Vercel it is detected automatically from `VERCEL_PROJECT_PRODUCTION_URL`; locally it falls back to `http://localhost:3000`. |
 
 ### Database
 
@@ -110,8 +110,9 @@ Before the first production deployment:
 1. Add `DATABASE_URL` to the Vercel project (Production and Preview) so the RFQ
    desk can persist requests. Without it the site still builds and runs; the RFQ
    endpoint returns a readable `503`.
-2. Add `NEXT_PUBLIC_SITE_URL` with the production domain so canonical URLs, Open
-   Graph images and `sitemap.xml` resolve correctly.
+2. Optionally add `NEXT_PUBLIC_SITE_URL` if you use a custom domain; otherwise
+   the canonical URL, Open Graph images and `sitemap.xml` are derived from
+   Vercel's `VERCEL_PROJECT_PRODUCTION_URL` automatically.
 3. Keep the Vercel Node.js version at 20.9 or newer (`engines` and `.nvmrc` pin
    this in the repository).
 
