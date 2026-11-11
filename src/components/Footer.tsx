@@ -50,7 +50,7 @@ export default function Footer() {
 
       <div className="shell grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Logo className="h-11" />
+          <Logo theme="dark" className="h-14" />
           <p className="mt-6 max-w-xs text-[0.8125rem] leading-relaxed">
             Upstream and midstream oil &amp; gas services, marine and industrial
             engineering contractor. Incorporated in Nigeria, 2015.

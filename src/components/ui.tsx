@@ -241,25 +241,50 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) 
 }
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
+/**
+ * The official Aviel Karis wordmark.
+ *
+ * `theme` describes the surface the logo sits on: on dark surfaces the
+ * lettering switches to white for contrast, while the copper keyline and
+ * the red-on-light treatment stay exactly as supplied. Both variants are
+ * mounted so the header can swap them without a network flash.
+ */
 export function Logo({
+  theme = "dark",
   className = "",
   alt = "Aviel Karis Services Ltd",
   priority = false,
 }: {
+  theme?: "dark" | "light";
   className?: string;
   alt?: string;
   priority?: boolean;
 }) {
+  const onDark = theme === "dark";
   return (
-    <span className={`inline-flex shrink-0 items-center ${className}`}>
+    <span className={`relative inline-flex shrink-0 items-center ${className}`}>
       <Image
         src="/brand/aviel-karis-logo.png"
-        alt={alt}
+        alt={onDark ? "" : alt}
+        aria-hidden={onDark || undefined}
+        width={245}
+        height={83}
+        sizes="(max-width: 640px) 160px, 190px"
+        className={`h-full w-auto object-contain transition-opacity duration-500 ${
+          onDark ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <Image
+        src="/brand/aviel-karis-logo-white.png"
+        alt={onDark ? alt : ""}
+        aria-hidden={!onDark || undefined}
         width={245}
         height={83}
         priority={priority}
-        sizes="(max-width: 640px) 118px, 148px"
-        className="h-full w-auto object-contain"
+        sizes="(max-width: 640px) 160px, 190px"
+        className={`absolute left-0 top-0 h-full w-auto object-contain transition-opacity duration-500 ${
+          onDark ? "opacity-100" : "opacity-0"
+        }`}
       />
     </span>
   );
