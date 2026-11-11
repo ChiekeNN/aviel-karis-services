@@ -76,7 +76,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               >
-                Indigenous capacity.
+                Indigenous capacity.{" "}
               </motion.span>
               <motion.span
                 className="block"
