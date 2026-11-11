@@ -6,8 +6,8 @@ headquartered in Port Harcourt, Rivers State.
 
 The site is a single, editorial-grade landing page covering the company,
 capabilities, sectors, standards, governance and contact. **Quotations are
-handled by phone and WhatsApp — there is no contact form, no database and no
-runtime environment configuration to maintain.**
+handled by phone, WhatsApp and email — there is no contact form, no database and
+no runtime environment configuration to maintain.**
 
 ## Stack
 
@@ -43,14 +43,17 @@ All quotation traffic goes directly to the procurement desk:
 - **WhatsApp** — [+234 902 033 4832](https://wa.me/2349020334832) with a
   pre-filled message template, opened from the hero, contact section, footer and
   a floating action button.
+- **Email** — [info@avielkarisservices.com](mailto:info@avielkarisservices.com)
+  with a pre-filled quotation subject and body, for formal tenders and documents.
 - **Phone** — [+234 902 033 4832](tel:+2349020334832) during working hours
   (8:00 AM – 5:00 PM WAT).
 - **Head office** — No 19 Obudu Street, Mile 1 Rumuwoji, Port Harcourt, with a
-  Google Maps directions link.
+  live Google Maps embed and a directions link.
 
-Update the number and hours once in `src/lib/content.ts`
-(`PHONE_DISPLAY`, `PHONE_TEL`, `WHATSAPP_NUMBER`, `WORKING_HOURS`) and every link
-across the site follows.
+Update the number, email, hours and address once in `src/lib/content.ts`
+(`PHONE_DISPLAY`, `PHONE_TEL`, `WHATSAPP_NUMBER`, `EMAIL`, `WORKING_HOURS`,
+`ADDRESS`) and every link across the site follows — including the map embed and
+the directions URL.
 
 ## Scripts
 
