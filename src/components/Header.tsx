@@ -2,9 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Clock, MapPin, Menu, X } from "lucide-react";
-import { NAV, ADDRESS } from "@/lib/content";
-import { Logo } from "./ui";
+import { ArrowUpRight, Clock, MapPin, Menu, Phone, X } from "lucide-react";
+import {
+  ADDRESS,
+  NAV,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+  WORKING_HOURS,
+} from "@/lib/content";
+import { Logo, WhatsAppIcon } from "./ui";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -69,13 +76,14 @@ export default function Header() {
             <div className="flex items-center gap-6">
               <p className="flex items-center gap-2">
                 <Clock size={12} className="text-gold" aria-hidden />
-                Mon–Fri 08:00–17:00 WAT
+                {WORKING_HOURS}
               </p>
               <a
-                href="#contact"
-                className="text-ivory/80 transition-colors hover:text-gold-soft"
+                href={`tel:${PHONE_TEL}`}
+                className="flex items-center gap-2 text-ivory/80 transition-colors hover:text-gold-soft"
               >
-                Procurement desk · 7 days a week
+                <Phone size={12} className="text-gold" aria-hidden />
+                Procurement desk · {PHONE_DISPLAY}
               </a>
             </div>
           </div>
@@ -233,10 +241,30 @@ export default function Header() {
                 <p className="mt-3 max-w-xs text-sm leading-relaxed text-ivory/60">
                   {ADDRESS}
                 </p>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center gap-2.5 border border-gold/50 px-4 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-ivory transition-colors hover:bg-gold hover:text-ink"
+                  >
+                    <WhatsAppIcon className="h-4 w-4" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center gap-2.5 border border-ivory/20 px-4 py-3.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-ivory transition-colors hover:border-gold hover:text-gold-soft"
+                  >
+                    <Phone size={14} aria-hidden />
+                    Call
+                  </a>
+                </div>
                 <a
                   href="#contact"
                   onClick={() => setOpen(false)}
-                  className="mt-6 inline-flex w-full items-center justify-between bg-scarlet px-6 py-4 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-ivory"
+                  className="mt-3 inline-flex w-full items-center justify-between border border-ivory/15 px-6 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ivory/80 transition-colors hover:border-gold/60 hover:text-gold-soft"
                 >
                   Request a quotation
                   <ArrowUpRight size={16} aria-hidden />

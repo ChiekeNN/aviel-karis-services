@@ -1,6 +1,13 @@
-import { ArrowUpRight, Flag } from "lucide-react";
-import { ADDRESS, NAV, SERVICES } from "@/lib/content";
-import { Logo } from "./ui";
+import { ArrowUpRight, Flag, Phone } from "lucide-react";
+import {
+  ADDRESS,
+  NAV,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  SERVICES,
+  WHATSAPP_URL,
+} from "@/lib/content";
+import { Logo, WhatsAppIcon } from "./ui";
 
 export default function Footer() {
   return (
@@ -88,6 +95,24 @@ export default function Footer() {
           <address className="mt-5 max-w-[16rem] text-[0.8125rem] not-italic leading-relaxed">
             {ADDRESS}
           </address>
+          <div className="mt-4 space-y-2.5 text-[0.75rem]">
+            <a
+              href={`tel:${PHONE_TEL}`}
+              className="flex items-center gap-2.5 transition-colors hover:text-gold-soft"
+            >
+              <Phone size={13} className="text-gold/80" aria-hidden />
+              {PHONE_DISPLAY}
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 transition-colors hover:text-gold-soft"
+            >
+              <WhatsAppIcon className="h-3.5 w-3.5 text-gold/80" />
+              WhatsApp us
+            </a>
+          </div>
           <p className="mt-4 text-[0.75rem] leading-relaxed">
             Services delivered in line with our Quality Policy and zero-incident
             Safety Policy, conforming to international oilfield client

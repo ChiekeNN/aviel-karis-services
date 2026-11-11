@@ -47,15 +47,15 @@ export const SERVICES: Service[] = [
       "CIPSMN-certified supply chain",
       "Warehousing & global forwarding/clearing",
       "Inventory financing",
-      "7-day responsive communication",
+      "Direct phone & WhatsApp communication",
     ],
     detail: {
       heading: "Global procurement power, delivered from Port Harcourt",
-      body: "Our supply chain team is certified by the Chartered Institute of Purchasing and Supply Management of Nigeria (CIPSMN). Through direct OEM partnerships we source critical oilfield materials from major global manufacturers, then manage warehousing, international forwarding and customs clearing end-to-end. Inventory financing keeps client projects moving, and our communication lines are monitored seven days a week — guided by our motto: deliver what the customer wants, quickly and in the cheapest possible way.",
+      body: "Our supply chain team is certified by the Chartered Institute of Purchasing and Supply Management of Nigeria (CIPSMN). Through direct OEM partnerships we source critical oilfield materials from major global manufacturers, then manage warehousing, international forwarding and customs clearing end-to-end. Inventory financing keeps client projects moving, and our communication lines are open throughout the working day — guided by our motto: deliver what the customer wants, quickly and in the cheapest possible way.",
       highlights: [
         { label: "Accreditation", value: "CIPSMN" },
         { label: "Sourcing", value: "Direct OEM" },
-        { label: "Response", value: "7 days / week" },
+        { label: "Contact", value: "Phone & WhatsApp" },
       ],
     },
   },
@@ -216,7 +216,7 @@ export const PILLARS = [
   { name: "Trust", text: "Transparent dealings and dependable commitments with every client and partner." },
   { name: "Experience", text: "Operational know-how earned across the Niger Delta since 2015." },
   { name: "Reliability", text: "Services that meet or exceed expectations, every time." },
-  { name: "Responsiveness", text: "Communication lines monitored seven days a week." },
+  { name: "Responsiveness", text: "Direct access to the team by phone and WhatsApp during working hours." },
   { name: "Excellence", text: "World-class quality delivered by well-trained, highly motivated professionals." },
 ];
 
@@ -232,11 +232,33 @@ export const NAV = [
 export const ADDRESS =
   "No 19 Obudu Street, Mile 1 Rumuwoji, Port Harcourt, Rivers State, Nigeria.";
 
+export const PHONE_DISPLAY = "+234 902 033 4832";
+export const PHONE_TEL = "+2349020334832";
+export const WHATSAPP_NUMBER = "2349020334832";
+export const WORKING_HOURS = "8:00 AM – 5:00 PM (WAT)";
+
+const WHATSAPP_MESSAGE = `Hello Aviel Karis Services, I would like to request a quotation.
+
+Company:
+Service needed:
+Location:
+Timeline:
+
+I can share drawings or specifications here.`;
+
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  WHATSAPP_MESSAGE,
+)}`;
+
+export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  ADDRESS,
+)}`;
+
 export const STATS = [
   { value: "2015", label: "Incorporated in Nigeria", note: "Port Harcourt HQ" },
   { value: "100%", label: "Indigenous Nigerian content", note: "Local content first" },
   { value: "10", label: "Integrated capabilities", note: "Upstream to industrial" },
-  { value: "24/7", label: "Supply logistics desk", note: "7-day response" },
+  { value: "8–5", label: "Procurement desk", note: "Phone & WhatsApp" },
 ];
 
 export const CREDENTIALS = [
@@ -302,14 +324,14 @@ export const PROCESS_STEPS = [
   {
     step: "04",
     title: "Deliver & document",
-    text: "Field crews execute to international oilfield client specifications under a zero-incident safety commitment, with communication lines monitored seven days a week.",
+    text: "Field crews execute to international oilfield client specifications under a zero-incident safety commitment, with a direct phone and WhatsApp line to the team during working hours.",
   },
 ];
 
 export const FAQS = [
   {
     q: "How quickly will a procurement inquiry be acknowledged?",
-    a: "Procurement requests submitted through our RFQ desk are acknowledged within one business day. Inquiry lines are monitored seven days a week, including for urgent field requirements and the 24/7 supply logistics desk.",
+    a: "Procurement inquiries are acknowledged within one business day. For urgent field requirements, call or send a WhatsApp message to the procurement desk during working hours — 8:00 AM to 5:00 PM (WAT).",
   },
   {
     q: "Which standards does Aviel Karis work to?",

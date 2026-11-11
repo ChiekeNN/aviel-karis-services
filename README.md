@@ -4,19 +4,19 @@ Website for **Aviel Karis Services Ltd**, an indigenous Nigerian upstream and
 midstream oil & gas services, marine and industrial engineering contractor
 headquartered in Port Harcourt, Rivers State.
 
-The site is a single, editorial-grade landing page: capabilities, sectors,
-standards, governance and a working Request-for-Quotation (RFQ) desk.
+The site is a single, editorial-grade landing page covering the company,
+capabilities, sectors, standards, governance and contact. **Quotations are
+handled by phone and WhatsApp — there is no contact form, no database and no
+runtime environment configuration to maintain.**
 
 ## Stack
 
-| Layer      | Technology                                     |
-| ---------- | ---------------------------------------------- |
-| Framework  | Next.js 16 (App Router, Turbopack)             |
-| UI         | React 19, Tailwind CSS v4, Framer Motion       |
-| Icons      | Lucide                                         |
-| Forms      | React Hook Form + Zod                          |
-| Data       | PostgreSQL via Drizzle ORM                     |
-| Typography | Manrope, Instrument Serif, JetBrains Mono      |
+| Layer      | Technology                                |
+| ---------- | ----------------------------------------- |
+| Framework  | Next.js 16 (App Router, Turbopack)        |
+| UI         | React 19, Tailwind CSS v4, Framer Motion  |
+| Icons      | Lucide                                    |
+| Typography | Manrope, Instrument Serif, JetBrains Mono |
 
 Fonts are self-hosted through Fontsource packages, so the site renders with its
 real typefaces without third-party font requests.
@@ -25,38 +25,42 @@ real typefaces without third-party font requests.
 
 ```bash
 npm install
-printf 'DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/app_db"\n' > .env.local
 npm run dev
 ```
 
-Open <http://localhost:3000>.
+Open <http://localhost:3000>. No environment variables are required.
 
-### Environment variables
+### Optional environment variables
 
-| Variable               | Required | Purpose                                                     |
-| ---------------------- | -------- | ----------------------------------------------------------- |
-| `DATABASE_URL`         | Yes      | PostgreSQL connection used by the RFQ and health endpoints. |
-| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL for metadata, `sitemap.xml` and `robots.txt`. On Vercel it is detected automatically from `VERCEL_PROJECT_PRODUCTION_URL`; locally it falls back to `http://localhost:3000`. |
+| Variable               | Required | Purpose                                                                 |
+| ---------------------- | -------- | ----------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | No       | Canonical URL for metadata, `sitemap.xml` and `robots.txt`. On Vercel it is detected automatically from `VERCEL_PROJECT_PRODUCTION_URL`; locally it falls back to `http://localhost:3000`. |
 
-### Database
+## Contact model
 
-```bash
-npx drizzle-kit push     # create/update the rfq_requests table
-```
+All quotation traffic goes directly to the procurement desk:
 
-The `rfq_requests` table stores each inquiry and returns a reference such as
-`AKS-RFQ-00042`. Only the attachment **file name** is logged; documents are
-requested by email rather than uploaded.
+- **WhatsApp** — [+234 902 033 4832](https://wa.me/2349020334832) with a
+  pre-filled message template, opened from the hero, contact section, footer and
+  a floating action button.
+- **Phone** — [+234 902 033 4832](tel:+2349020334832) during working hours
+  (8:00 AM – 5:00 PM WAT).
+- **Head office** — No 19 Obudu Street, Mile 1 Rumuwoji, Port Harcourt, with a
+  Google Maps directions link.
+
+Update the number and hours once in `src/lib/content.ts`
+(`PHONE_DISPLAY`, `PHONE_TEL`, `WHATSAPP_NUMBER`, `WORKING_HOURS`) and every link
+across the site follows.
 
 ## Scripts
 
-| Command             | Description                        |
-| ------------------- | ---------------------------------- |
-| `npm run dev`       | Development server                 |
-| `npm run build`     | Production build                   |
-| `npm run start`     | Serve the production build         |
-| `npm run lint`      | ESLint (Next core web vitals)      |
-| `npm run typecheck` | TypeScript, no emit                |
+| Command             | Description                 |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Development server          |
+| `npm run build`     | Production build            |
+| `npm run start`     | Serve the production build  |
+| `npm run lint`      | ESLint (Next core vitals)   |
+| `npm run typecheck` | TypeScript, no emit         |
 
 ## Design system
 
@@ -79,25 +83,25 @@ labels for technical precision.
 ```
 src/
   app/
-    api/health/route.ts     # DB liveness probe
-    api/rfq/route.ts        # RFQ intake + validation
     globals.css             # design tokens, texture, motion utilities
     layout.tsx              # fonts, metadata, JSON-LD
     page.tsx                # page composition
     robots.ts / sitemap.ts  # crawler metadata
-  components/               # Header, Hero, About, Services, Sectors, Process,
-                            # Quality, Structure, Faq, Contact, Footer, ui
-  db/                       # Drizzle client + schema
-  lib/content.ts            # all copy and structured content
-  lib/rfq.ts                # Zod schema + service categories
+  components/
+    Header, Hero, About, Services, Sectors, Process, Quality,
+    Structure, Faq, Contact, Footer, FloatingWhatsApp,
+    BackToTop, Ticker, ui
+  lib/
+    content.ts              # all copy, contact details and structured content
+    site.ts                 # canonical URL resolution
 public/images/              # site photography
 ```
 
 ## Editing content
 
 Almost all copy lives in `src/lib/content.ts` — services, pillars, sectors,
-process steps, FAQs, statistics, navigation and the head-office address. Update
-it there rather than inside presentational components.
+process steps, FAQs, statistics, navigation, contact details and the head-office
+address. Update it there rather than inside presentational components.
 
 ## Deployment (Vercel)
 
@@ -105,23 +109,13 @@ The repository is connected to Vercel through the GitHub integration, so every
 push to `main` produces a production deployment and every pull request produces
 a preview deployment. No CLI token is required.
 
-Before the first production deployment:
-
-1. Add `DATABASE_URL` to the Vercel project (Production and Preview) so the RFQ
-   desk can persist requests. Without it the site still builds and runs; the RFQ
-   endpoint returns a readable `503`.
-2. Optionally add `NEXT_PUBLIC_SITE_URL` if you use a custom domain; otherwise
-   the canonical URL, Open Graph images and `sitemap.xml` are derived from
-   Vercel's `VERCEL_PROJECT_PRODUCTION_URL` automatically.
-3. Keep the Vercel Node.js version at 20.9 or newer (`engines` and `.nvmrc` pin
-   this in the repository).
+- No environment variables are needed for the site to build or run.
+- Optionally add `NEXT_PUBLIC_SITE_URL` if you use a custom domain; otherwise
+  canonical URLs, Open Graph images and `sitemap.xml` are derived from Vercel's
+  `VERCEL_PROJECT_PRODUCTION_URL` automatically.
+- Node.js 20.9 or newer is required (`engines` and `.nvmrc` pin this).
 
 ## Repository hygiene
 
 `.gitignore` covers dependencies, Next.js build output, local environment files
-and TypeScript build info. If you clone an older revision that still tracks
-`node_modules/` or `.next/`, untrack them once:
-
-```bash
-git rm -r --cached node_modules .next
-```
+and TypeScript build info.

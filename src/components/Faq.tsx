@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
-import { FAQS } from "@/lib/content";
+import { FAQS, WHATSAPP_URL } from "@/lib/content";
 import { ActionLink, Eyebrow, Reveal } from "./ui";
 
 export default function Faq() {
@@ -34,8 +34,8 @@ export default function Faq() {
               </p>
             </Reveal>
             <Reveal delay={0.1} className="mt-9">
-              <ActionLink href="#contact" variant="ghost-dark">
-                Ask a direct question
+              <ActionLink href={WHATSAPP_URL} variant="ghost-dark" external>
+                Ask on WhatsApp
               </ActionLink>
             </Reveal>
             <Reveal delay={0.15}>
