@@ -24,7 +24,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.35 }}
-          className="fixed bottom-6 right-5 z-40 grid h-11 w-11 place-items-center border border-gold/40 bg-ink/80 text-gold backdrop-blur-md transition-colors hover:border-gold hover:bg-gold hover:text-ink sm:bottom-8 sm:right-8"
+          className="fixed bottom-20 right-5 z-40 grid h-11 w-11 place-items-center border border-gold/40 bg-ink/80 text-gold backdrop-blur-md transition-colors hover:border-gold hover:bg-gold hover:text-ink sm:bottom-24 sm:right-8"
         >
           <ArrowUp size={16} strokeWidth={1.75} aria-hidden />
         </motion.a>

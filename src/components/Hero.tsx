@@ -4,8 +4,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { BadgeCheck, MapPin, MoveDown } from "lucide-react";
-import { STATS } from "@/lib/content";
-import { ActionLink } from "./ui";
+import { PHONE_DISPLAY, STATS, WHATSAPP_URL } from "@/lib/content";
+import { ActionLink, WhatsAppIcon } from "./ui";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -112,6 +112,24 @@ export default function Hero() {
                 Explore capabilities
               </ActionLink>
             </motion.div>
+
+            <motion.a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.74 }}
+              className="group mt-7 inline-flex items-center gap-3 text-[0.8125rem] text-ivory/60 transition-colors hover:text-ivory"
+            >
+              <span className="grid h-8 w-8 place-items-center border border-gold/40 text-gold transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-ink">
+                <WhatsAppIcon className="h-4 w-4" />
+              </span>
+              <span>
+                Prefer WhatsApp?{" "}
+                <span className="font-semibold text-ivory/90">{PHONE_DISPLAY}</span>
+              </span>
+            </motion.a>
           </div>
         </div>
 

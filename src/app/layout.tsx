@@ -6,6 +6,7 @@ import "@fontsource/instrument-serif/latin-400-italic.css";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import MotionProvider from "@/components/MotionProvider";
+import { PHONE_TEL } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 const SITE_TITLE =
@@ -68,6 +69,13 @@ const organisationSchema = {
   name: "Aviel Karis Services Ltd",
   description: SITE_DESCRIPTION,
   foundingDate: "2015",
+  telephone: PHONE_TEL,
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: PHONE_TEL,
+    contactType: "sales",
+    availableLanguage: ["en"],
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "No 19 Obudu Street, Mile 1 Rumuwoji",

@@ -56,8 +56,8 @@ const GUARANTEE = [
   },
   {
     icon: Timer,
-    title: "7-Day Responsiveness",
-    text: "Communication monitored seven days a week for urgent field requirements.",
+    title: "Direct Communication",
+    text: "Phone and WhatsApp lines to the team during working hours — 8:00 AM to 5:00 PM (WAT).",
   },
 ];
 
