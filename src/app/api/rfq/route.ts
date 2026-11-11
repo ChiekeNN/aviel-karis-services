@@ -15,6 +15,17 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return Response.json({ ok: false, error: "Validation failed", issues: parsed.error.issues }, { status: 422 });
   }
+  if (!db) {
+    return Response.json(
+      {
+        ok: false,
+        error:
+          "The RFQ desk is temporarily unavailable. Please try again in a few minutes.",
+      },
+      { status: 503 },
+    );
+  }
+
   try {
     const d = parsed.data;
     const [row] = await db
