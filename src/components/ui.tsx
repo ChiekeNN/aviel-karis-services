@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import {
@@ -241,54 +242,25 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) 
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
 export function Logo({
-  theme = "light",
   className = "",
+  alt = "Aviel Karis Services Ltd",
+  priority = false,
 }: {
-  theme?: "light" | "dark";
   className?: string;
+  alt?: string;
+  priority?: boolean;
 }) {
-  const light = theme === "light";
   return (
-    <span className={`group flex items-center gap-3.5 ${className}`}>
-      <span
-        className={`relative grid h-11 w-11 place-items-center border transition-colors duration-500 ${
-          light
-            ? "border-ivory/25 group-hover:border-gold/70"
-            : "border-ink/20 group-hover:border-gold-deep"
-        }`}
-        aria-hidden
-      >
-        <svg viewBox="0 0 40 40" className="h-7 w-7" fill="none">
-          <path
-            d="M9 30.5 20 9.5l11 21"
-            stroke={light ? "#f8f5ef" : "#060b12"}
-            strokeWidth="2.1"
-            strokeLinecap="square"
-          />
-          <path
-            d="M14.4 23.2h11.2"
-            stroke={light ? "#f8f5ef" : "#060b12"}
-            strokeWidth="2.1"
-          />
-          <circle cx="20" cy="9.5" r="2.6" fill="#d42a1f" />
-        </svg>
-      </span>
-      <span className="leading-none">
-        <span
-          className={`block text-[0.9rem] font-extrabold uppercase tracking-[0.2em] ${
-            light ? "text-ivory" : "text-ink"
-          }`}
-        >
-          Aviel Karis
-        </span>
-        <span
-          className={`mt-1.5 block font-mono text-[0.5625rem] uppercase tracking-[0.34em] ${
-            light ? "text-ivory/60" : "text-ink/60"
-          }`}
-        >
-          Services Ltd
-        </span>
-      </span>
+    <span className={`inline-flex shrink-0 items-center ${className}`}>
+      <Image
+        src="/brand/aviel-karis-logo.png"
+        alt={alt}
+        width={245}
+        height={83}
+        priority={priority}
+        sizes="(max-width: 640px) 118px, 148px"
+        className="h-full w-auto object-contain"
+      />
     </span>
   );
 }

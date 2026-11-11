@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/hero-offshore.jpg",
-        width: 1536,
-        height: 864,
-        alt: "Offshore production platform at dusk — Aviel Karis Services Ltd",
+        url: "/images/og-aviel-karis.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Aviel Karis Services Ltd — oil, gas, marine and industrial engineering, Port Harcourt",
       },
     ],
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/hero-offshore.jpg"],
+    images: ["/images/og-aviel-karis.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -68,6 +68,7 @@ const organisationSchema = {
   "@type": "Organization",
   name: "Aviel Karis Services Ltd",
   description: SITE_DESCRIPTION,
+  logo: `${SITE_URL}/brand/aviel-karis-logo-tile.png`,
   foundingDate: "2015",
   telephone: PHONE_TEL,
   email: EMAIL,
