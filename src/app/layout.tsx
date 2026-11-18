@@ -12,7 +12,7 @@ import { SITE_URL } from "@/lib/site";
 const SITE_TITLE =
   "Aviel Karis Services Ltd | Oil & Gas, Marine & Industrial Engineering";
 const SITE_DESCRIPTION =
-  "Indigenous Nigerian upstream and midstream oil & gas services, procurement, pipeline fabrication, marine and industrial engineering contractor headquartered in Port Harcourt since 2015.";
+  "Nigerian oil and gas services, procurement, pipeline fabrication and marine engineering, delivered from Port Harcourt across Nigeria and beyond.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Aviel Karis Services Ltd",
   },
   description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   applicationName: "Aviel Karis Services Ltd",
   keywords: [
     "oil and gas services Nigeria",
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
   category: "Oil & Gas Services",
   openGraph: {
     type: "website",
+    url: "/",
     locale: "en_NG",
     siteName: "Aviel Karis Services Ltd",
     title: SITE_TITLE,
@@ -43,6 +45,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/og-aviel-karis.jpg",
+        type: "image/jpeg",
         width: 1200,
         height: 630,
         alt: "Aviel Karis Services Ltd — oil, gas, marine and industrial engineering, Port Harcourt",

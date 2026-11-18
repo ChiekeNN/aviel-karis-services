@@ -34,7 +34,17 @@ Open <http://localhost:3000>. No environment variables are required.
 
 | Variable               | Required | Purpose                                                                 |
 | ---------------------- | -------- | ----------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | No       | Canonical URL for metadata, `sitemap.xml` and `robots.txt`. On Vercel it is detected automatically from `VERCEL_PROJECT_PRODUCTION_URL`; locally it falls back to `http://localhost:3000`. |
+| `NEXT_PUBLIC_SITE_URL` | No       | Override the canonical URL for metadata, `sitemap.xml` and `robots.txt`. Production defaults to `https://www.avielkarisservices.com`; Vercel previews use their deployment URL, and local development uses `http://localhost:3000`. If set in production, this variable must be the public custom domain. |
+
+### Link previews
+
+The page supplies a title, description, canonical URL and a 1200 × 630 Open
+Graph image (`public/images/og-aviel-karis.jpg`), as well as Twitter card and
+favicon metadata. Messaging apps choose their own preview layout: some show the
+image as a thumbnail, while others display a larger card or no image at all.
+After deploying changes, cached previews may take time to refresh. Use the
+sharing platform's preview debugger or cache refresh tool where available; an
+existing message may continue to show the old preview.
 
 ## Contact model
 
